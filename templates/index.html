@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Votação de Filmes e Séries</title>
+</head>
+<body>
+  <h1>Votação de Filmes</h1>
+
+  <!-- Totais gerais -->
+  <div>
+    Totais: 👍 {{ total_gostei }}  |  👎 {{ total_naoGostei }}
+  </div>
+
+  <!-- Formulário -->
+  <h2>Adicionar filme</h2>
+  <form action="/adicionar" method="post">
+    <input name="titulo" placeholder="Título" required><br>
+    <input name="genero" placeholder="Gênero" required><br>
+    <input name="imagem" placeholder="URL da imagem" required><br>
+    <textarea name="descricao" placeholder="Descrição (opcional)"></textarea><br>
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <hr>
+
+  <!-- Lista -->
+  {% for f in filmes %}
+    <h3>{{ f[1] }} ({{ f[2] }})</h3>
+    <div>{{ f[3] }}</div>
+    <div><img src="{{ f[4] }}" alt="capa" width="80"></div>
+    <div>👍 {{ f[5] }}  |  👎 {{ f[6] }}</div>
+    <div>
+      <a href="/votar/{{ f[0] }}/gostei">Gostei</a>
+      <a href="/votar/{{ f[0] }}/naogostei">Não Gostei</a>
+    </div>
+    <hr>
+  {% endfor %}
+</body>
